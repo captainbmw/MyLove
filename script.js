@@ -5,55 +5,62 @@ document.addEventListener('DOMContentLoaded', () => {
     const proposalCard = document.getElementById('proposal-card');
     const celebration = document.getElementById('celebration');
 
-    // Create falling hearts (Professional Background)
-    function createHeart() {
+    // Create expanding cinematic hearts
+    function createExpandingHeart() {
         const heart = document.createElement('div');
-        heart.classList.add('heart');
+        heart.classList.add('expanding-heart');
         heart.innerHTML = '❤️';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = Math.random() * 5 + 3 + 's'; // Slower, more emotional (3-8s)
-        heart.style.fontSize = Math.random() * 15 + 10 + 'px';
-        heart.style.opacity = Math.random() * 0.5 + 0.2;
+        
+        // Very slight offset to keep it centered enough to frame content
+        const offsetX = (Math.random() - 0.5) * 5;
+        const offsetY = (Math.random() - 0.5) * 5;
+        heart.style.marginLeft = `${offsetX}px`;
+        heart.style.marginTop = `${offsetY}px`;
         
         background.appendChild(heart);
 
+        // Cleanup
         setTimeout(() => {
             heart.remove();
-        }, 8000);
+        }, 10000);
     }
 
-    // Generate hearts periodically
-    setInterval(createHeart, 400);
+    // Generate cinematic hearts periodically (slower for focus)
+    setInterval(createExpandingHeart, 3000);
+
+    // Initial heart
+    createExpandingHeart();
 
     // Submit Action & WhatsApp Integration
     submitBtn.addEventListener('click', () => {
         const answer = answerInput.value.trim();
         
         if (answer === "") {
-            answerInput.style.borderColor = "#ff4757";
-            setTimeout(() => answerInput.style.borderColor = "#dcdde1", 2000);
+            answerInput.style.borderColor = "#ff4d6d";
+            setTimeout(() => answerInput.style.borderColor = "rgba(255,255,255,0.1)", 2000);
             return;
         }
 
         // WhatsApp Integration
-        const phoneNumber = "254796092703"; // Your WhatsApp number
-        const message = `My answer to your question: "${answer}"`;
+        const phoneNumber = "254796092703";
+        const message = `From my heart: "${answer}"`;
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
-        // Open WhatsApp in a new tab
         window.open(whatsappUrl, '_blank');
 
-        // Show on-screen celebration
+        // Cinematic Transition
         proposalCard.style.opacity = '0';
+        proposalCard.style.transform = 'translateY(20px) scale(0.95)';
+        
         setTimeout(() => {
             proposalCard.classList.add('hidden');
             celebration.classList.remove('hidden');
             
-            // Burst of emotional hearts
-            for(let i = 0; i < 40; i++) {
-                setTimeout(createHeart, i * 150);
+            // Celebration burst of hearts
+            for(let i = 0; i < 20; i++) {
+                setTimeout(createExpandingHeart, i * 200);
             }
-        }, 600);
+        }, 800);
     });
 });
