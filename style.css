@@ -1,0 +1,187 @@
+:root {
+    --primary-pink: #ffb7c5;
+    --deep-burgundy: #630d0d;
+    --deep-red: #8e1c1c;
+    --gold: #d4af37;
+    --white: #ffffff;
+    --soft-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lora', serif;
+    background: linear-gradient(135deg, #fdf2f2 0%, #fce4ec 100%);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+/* Background Animation */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    opacity: 0.4;
+}
+
+.heart {
+    position: absolute;
+    color: var(--deep-red);
+    opacity: 0.4;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+/* Content Layout */
+.content-wrapper {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    text-align: center;
+    z-index: 10;
+}
+
+.hero-section {
+    margin-bottom: 4rem;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: var(--deep-burgundy);
+    margin-bottom: 1.5rem;
+}
+
+.deep-quote {
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #2c3e50;
+    max-width: 600px;
+    margin: 0 auto;
+    border-left: 3px solid var(--deep-red);
+    padding-left: 2rem;
+    text-align: left;
+}
+
+/* Proposal Card (Now Reflection Card) */
+.proposal-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4rem 3rem;
+    border-radius: 30px;
+    box-shadow: var(--soft-shadow);
+    border: 1px solid rgba(142, 28, 28, 0.1);
+    backdrop-filter: blur(8px);
+    transition: var(--transition-slow);
+    animation: slideUp 1s ease-out;
+}
+
+.question {
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+    color: var(--deep-burgundy);
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+}
+
+.input-container {
+    margin-bottom: 2rem;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 1px solid #dcdde1;
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    resize: none;
+    transition: border-color 0.3s;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--deep-red);
+    background: white;
+}
+
+.btn {
+    padding: 1.2rem 3.5rem;
+    font-size: 1.1rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s;
+    background-color: var(--deep-burgundy);
+    color: white;
+    box-shadow: 0 4px 15px rgba(99, 13, 13, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    background-color: var(--deep-red);
+    box-shadow: 0 8px 25px rgba(142, 28, 28, 0.4);
+}
+
+/* Celebration Section */
+.celebration-container {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 4rem 3rem;
+    border-radius: 30px;
+    box-shadow: var(--soft-shadow);
+}
+
+.celebration-content h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: var(--deep-burgundy);
+    margin-bottom: 1.5rem;
+}
+
+.romantic-quote {
+    margin-top: 3rem;
+    font-style: italic;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .title { font-size: 2.5rem; }
+    .deep-quote { font-size: 1.1rem; padding-left: 1rem; }
+    .question { font-size: 1.4rem; }
+    .proposal-container { padding: 2rem 1.5rem; }
+}
