@@ -3,45 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>From My Heart to Yours</title>
+    <title>For You, With All My Love</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="background-overlay"></div>
-    <div class="background-container" id="background"></div>
+    <canvas id="scene-canvas" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
 
-    <main class="content-wrapper">
-        <section class="hero-section">
-            <h1 class="title">My Dearest...</h1>
-            <div class="deep-quote">
-                <p>"I know I’ve caused a shadow where there should only be light. My heart aches with the weight of my mistakes, but even more so with the thought of losing the magic we share. Please remember that my love for you is the only thing that has never wavered. I am not asking to go back to how things were—I am asking to build something even stronger with you. Let my heart be your home again."</p>
-            </div>
+    <div class="loader" id="loader">
+        <div class="loader-heart">♥</div>
+        <p>Opening my heart for you...</p>
+    </div>
+
+    <main class="ui-layer" id="ui">
+        <nav class="top-nav">
+            <span class="brand">Made with love</span>
+            <button type="button" class="music-toggle" id="music-toggle" title="Toggle ambient music">♪</button>
+        </nav>
+
+        <section class="panel hero active" data-panel="hero">
+            <p class="eyebrow">A little universe, just for you</p>
+            <h1 class="script-title">I Love You,<br><span id="her-name">Beautiful</span></h1>
+            <p class="hero-sub">Every star in this sky is a reason my heart chose you.</p>
+            <button type="button" class="cta primary" id="enter-btn">Step into our world</button>
+            <p class="hint">Move your mouse · tap anywhere for hearts</p>
         </section>
 
-        <section class="proposal-container" id="proposal-card">
-            <h2 class="question">Do you think two people who genuinely care about each other should let one painful moment erase everything beautiful they once felt?</h2>
-            <div class="input-container">
-                <textarea id="answer-input" placeholder="Please, tell me what your heart feels..."></textarea>
+        <section class="panel letter hidden" data-panel="letter">
+            <h2 class="section-title">A letter from my heart</h2>
+            <div class="letter-card glass">
+                <p id="letter-text">
+                    You are the calm in my chaos and the light in every ordinary day.
+                    I built this little world so you could feel, even for a moment,
+                    how deeply and completely you are loved.
+                </p>
+                <p class="signature">— Forever yours</p>
             </div>
-            <div class="button-group">
-                <button id="submit-btn" class="btn yes">Send to My Heart</button>
+            <div class="nav-dots" role="tablist" aria-label="Love reasons">
+                <button type="button" class="dot active" data-reason="0" aria-label="Reason 1"></button>
+                <button type="button" class="dot" data-reason="1" aria-label="Reason 2"></button>
+                <button type="button" class="dot" data-reason="2" aria-label="Reason 3"></button>
+                <button type="button" class="dot" data-reason="3" aria-label="Reason 4"></button>
+                <button type="button" class="dot" data-reason="4" aria-label="Reason 5"></button>
             </div>
+            <button type="button" class="cta secondary" id="next-reason">Another reason I adore you →</button>
         </section>
 
-        <section id="celebration" class="celebration-container hidden">
-            <div class="celebration-content">
-                <h2>Thank You for Listening ❤️</h2>
-                <p id="response-message">I promise to spend every day proving how much you mean to me.</p>
-                <div class="romantic-quote">
-                    "I will never stop choosing you, every single day, in every single way."
-                </div>
-            </div>
+        <section class="panel wishes hidden" data-panel="wishes">
+            <h2 class="section-title">Three wishes for us</h2>
+            <ul class="wish-list">
+                <li class="wish glass"><span>01</span> More slow mornings together, coffee and your smile.</li>
+                <li class="wish glass"><span>02</span> A lifetime of inside jokes only we understand.</li>
+                <li class="wish glass"><span>03</span> To keep choosing each other—today, tomorrow, always.</li>
+            </ul>
+            <button type="button" class="cta primary" id="surprise-btn">Open your surprise ♥</button>
+        </section>
+
+        <section class="panel finale hidden" data-panel="finale">
+            <div class="finale-heart" id="finale-heart">♥</div>
+            <h2 class="script-title finale-title">You are my favorite everything</h2>
+            <p class="finale-quote">"In all the world, there is no heart for me like yours."</p>
+            <textarea id="love-note" class="love-note glass" placeholder="Leave a note in the stars (optional)..."></textarea>
+            <button type="button" class="cta primary" id="send-love">Send this moment to me</button>
+            <p class="finale-small">Or simply stay here awhile. You deserve to feel adored.</p>
         </section>
     </main>
 
+    <audio id="ambient" loop preload="auto">
+        <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Fallback: hide loader even if script fails (shows UI instead of infinite loading)
+        setTimeout(function () {
+            var loader = document.getElementById('loader');
+            if (loader && !loader.classList.contains('hidden')) {
+                loader.classList.add('hidden');
+            }
+        }, 5000);
+    </script>
 </body>
 </html>
